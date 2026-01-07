@@ -1,0 +1,12 @@
+<h1>Transactions</h1>
+
+<app-transaction-form
+  [amount]="selectedAmount"
+  [editing]="selectedId !== null"
+  (save)="onSave($event)">
+</app-transaction-form>
+
+<app-transaction-list
+  [transactions]="transactions"
+  (edit)="onEdit($event)">
+</app-transaction-list>

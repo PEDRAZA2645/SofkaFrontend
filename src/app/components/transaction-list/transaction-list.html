@@ -1,0 +1,46 @@
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Monto</th>
+    <th>Comision</th>
+    <th>Fecha Creación</th>
+    <th>Fecha Actualización</th>
+    <th>Acciones</th>
+  </tr>
+
+  <tr *ngFor="let t of transactions">
+    <td>{{ t.id }}</td>
+
+    <td>
+      <ng-container *ngIf="editingId === t.id; else viewAmount">
+        <input
+          type="number"
+          [(ngModel)]="t.amount"
+          min="1"
+        />
+      </ng-container>
+
+      <ng-template #viewAmount>
+        {{ t.amount }}
+      </ng-template>
+    </td>
+
+    <td>{{ t.commission }}</td>
+    <td>{{ t.creationDate }}</td>
+    <td>{{ t.updateDate }}</td>
+
+    <td>
+      <button *ngIf="editingId !== t.id" (click)="startEdit(t)">
+        Update
+      </button>
+
+      <button *ngIf="editingId === t.id" (click)="saveEdit(t)">
+        Save
+      </button>
+
+      <button *ngIf="editingId === t.id" (click)="cancelEdit()">
+        Cancel
+      </button>
+    </td>
+  </tr>
+</table>
